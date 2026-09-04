@@ -90,6 +90,111 @@ const App = () => {
 
 -----------
 
+теперь будем разбивать на компоненты
+
+а нас сейчас один компонент  App , и в нем все верстка страницы, это неудобно
+
+сделали компонент большой карточки статьи - 
+
+- наш компонент вообще ничего не знает про окружение, он умеет рисовать одну статью - это хороший подход
+
+то есть он выполняет одну конкретную задачу и у него очень мало внешних зависимостей
+
+
+
+const MainArticle = ({title, image, description, category, source}) => {
+  return (
+    <article className="main-article" key={title}>
+      <div className="main-article__image-container">
+        <img className="main-article__image" src={image} alt="Фото новости" />
+      </div>
+      <div className="main-article__content">
+        <span className="article-category main-article__category">
+          {category}
+        </span>
+        <h2 className="main-article__title">{title}</h2>
+        <p className="main-article__text">{description}</p>
+        <span className="article-source main-article__source">{source}</span>
+      </div>
+    </article>
+  );
+};
+
+-- где используем его:
+
+            <section className="articles__big-column">
+              {articles.items
+                .filter((item) => item.category_id === categoryIds[category])
+                .map((item) => {
+                  return (
+                    <MainArticle
+                      key={item.title}
+                      title={item.title}
+                      image={item.image}
+                      description={item.description}
+                      category={
+                        articles.categories.find(
+                          ({ id }) => item.category_id === id,
+                        ).name
+                      }
+                      source={
+                        articles.sources.find(
+                          (source) => source.id === item.source_id,
+                        ).name
+                      }
+                    />
+                  );
+                })}
+            </section>
+
+
+----- так же для карточки маленькой:
+
+компонент:
+
+const SmallArticle = ({title, date, source}) => {
+  return (
+    <article className="small-article">
+      <h2 className="small-article__title">{title}</h2>
+      <p className="small-article__caption">
+        <span className="article-date small-article__date">
+          {new Date(date).toLocaleDateString("ru-RU", {
+            month: "long",
+            day: "numeric",
+          })}
+        </span>
+        <span className="article-source small-article__source">
+          {source}
+        </span>
+      </p>
+    </article>
+  );
+};
+
+-- (тут логику переформатирвоания даты оставили в компоененте - это правильно, 
+потому что алгоритм переформатирования не требует никаких внешних зависимостей
+
+
+
+---- использование:
+
+
+            <section className="articles__small-column">
+              {articles.items
+                .filter((item) => item.category_id === categoryIds[category])
+                .slice(0, 3)
+                .map((item) => {
+                  return (
+                    <SmallArticle 
+                    key={item.title}
+                    title={item.title}
+                    date={item.date}
+                    source={articles.sources.find((source) => source.id === item.source_id).name}
+                    />
+                  );
+                })}
+            </section>
+
 
 
 
