@@ -1,3 +1,4 @@
+import React from 'react';
 import { categoryIds } from './utils.js';
 import { MainArticle } from './MainArticle.js';
 import { SmallArticle } from './SmallArticle.js';

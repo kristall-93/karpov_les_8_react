@@ -1,3 +1,4 @@
+import React from 'react';
 import { categoryNames } from './utils.js';
 
 export const Navigation = ({ onNavClick, currentCategory, className = "", placement="header" }) => {
