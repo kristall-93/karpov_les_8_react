@@ -1,5 +1,11 @@
 import React from 'react';
-import { categoryNames } from './utils.js';
+import { categoryNames } from '../../utils.js';
+import './Navigation.css';
+import logo from '../../images/logo.svg'
+
+console.log(logo);
+console.log(logo);
+
 
 export const Navigation = ({ onNavClick, currentCategory, className = "", placement="header" }) => {
   return (
@@ -7,7 +13,7 @@ export const Navigation = ({ onNavClick, currentCategory, className = "", placem
       <a className="navigation__logo" data-href="index" href="#">
         <img
           className="navigation__image"
-          src="./images/logo.svg"
+          src={logo}
           alt="Логотип"
         />
       </a>

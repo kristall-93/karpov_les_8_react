@@ -1,6 +1,8 @@
 import React from 'react';
-import { Navigation } from "./Navigation.js";
-import { Articles } from "./Articles.js";
+import { Navigation } from "../Navigation/Navigation.js";
+import { Articles } from "../Articles/Articles.js";
+import './App.css';
+import news from '../../news.json'
 
 export const App = () => {
   const [category, setCategory] = React.useState("index"); // стейт для текущей выбранной категории
@@ -17,7 +19,8 @@ export const App = () => {
   };
 
   React.useEffect(() => {
-    fetch("./../news.json")
+    // fetch("./news.json")
+    fetch(news)
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
