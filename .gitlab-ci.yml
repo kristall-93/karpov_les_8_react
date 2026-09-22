@@ -1,9 +1,11 @@
+image: node:20.19.0
+
 pages:
   stage: deploy
+  before script: npm install
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
+    - npm run build
+    - cp -r dist .public
   artifacts:
     paths:
       - public

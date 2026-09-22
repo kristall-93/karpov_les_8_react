@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { template } = require('@babel/core')
 
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'production',
   entry: './src/script.js',  // говорим, где у нас в проекте точка входа - файл, где происходит рендер приложения и т.п.
   output: {
     path: path.resolve(__dirname, 'dist'),
